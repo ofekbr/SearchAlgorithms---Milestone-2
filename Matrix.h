@@ -9,8 +9,10 @@
 #include <utility>
 #include <vector>
 #include <functional>
+#include "Searchable.h"
 
-class Matrix{
+template <typename T>
+class Matrix : public Searchable<T>{
     string m_matrixName;
     State<pair<int,int>> m_initialState;
     State<pair<int,int>> m_goalState;

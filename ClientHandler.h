@@ -25,8 +25,7 @@ public:
     MyTestClientHandler()= default;
     void handleClient(int socket) override;
     vector<vector<State<pair<int,int>>>> createStateMatrix(vector<vector<int>> vecMatrix, int numRow, int numCol);
-    //TODO change from matrix to searchable
-    Matrix createProblem(int socket);
+    Searchable<pair<int,int>>* createProblem(int socket);
     //string = solution
     void sendSolution(int,const string&);
     ~MyTestClientHandler() =default;
