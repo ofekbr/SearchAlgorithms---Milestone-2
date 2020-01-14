@@ -91,8 +91,8 @@ Matrix MyTestClientHandler::createProblem(int socket){
     vector<vector<State<pair<int,int>>>> matrixOfState = createStateMatrix(matrix, numRow-1,firstNumCol);
 
     //creating a searchable object- matrix
-    State<pair<int,int>> startState = pair <int, int> (start.at(0),start.at(1));
-    State<pair<int,int>> goalState = pair <int, int> (goal.at(0),goal.at(1));
+    State<pair<int,int>> startState(pair<int,int>(start.at(0),start.at(1)));
+    State<pair<int,int>> goalState(pair <int, int> (goal.at(0),goal.at(1)));
 
     //cost is the value in the specific point
     startState.setCost(matrix[start.at(0)][start.at(1)]);
