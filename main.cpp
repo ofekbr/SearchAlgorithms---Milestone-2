@@ -3,8 +3,11 @@
 //
 
 #include "SerialServer.h"
+#include "ClientHandler.h"
 
 int main(int argc, char const *argv[]) {
     SerialServer server;
-    server.open(1234);
+    MyTestClientHandler ch;
+    server.open(12345, &ch);
+
 }
