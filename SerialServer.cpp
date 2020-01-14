@@ -3,13 +3,14 @@
 //
 
 #include "SerialServer.h"
+#include "ClientHandler.h"
 #include <sys/socket.h>
 #include <iostream>
 #include <unistd.h>
 #include <netinet/in.h>
 #include <cstring>
 
-void SerialServer::open(int port) {
+void SerialServer::open(int port, ClientHandler *clientHandler) {
     //create socket
     int client_socket;
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -45,17 +46,7 @@ void SerialServer::open(int port) {
             return;
         }
 
-        //reading from client
-        char buffer[1024] = {0};
-        int valread = read( client_socket , buffer, 1024);
-        std::cout<<buffer<<std::endl;
-
-        //writing back to client
-        char *hello = "Hello, I can hear you!! \n";
-        send(client_socket , hello , strlen(hello) , 0 );
-        std::cout<<"Hello message sent\n"<<std::endl;
-
-        //clienthandler.handle(client_socket);
+        clientHandler->handleClient(client_socket);
         close(client_socket);
         stop();
     }

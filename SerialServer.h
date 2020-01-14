@@ -11,7 +11,7 @@ class SerialServer : public Server {
     bool server_holder = true;
 public:
     SerialServer();
-    void open(int port) override;
+    void open(int port, ClientHandler *clientHandler) override;
     void stop() override;
 };
 

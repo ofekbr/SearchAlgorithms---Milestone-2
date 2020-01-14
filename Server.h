@@ -6,8 +6,10 @@
 #define EX4_SERVER_H
 
 
+#include "ClientHandler.h"
+
 class Server {
-    virtual void open(int port) = 0;
+    virtual void open(int port, ClientHandler *clientHandler) = 0;
     virtual void stop() = 0;
 };
 
