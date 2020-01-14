@@ -17,13 +17,13 @@ using namespace std;
 
 //change from string to P-problem
 
-template <typename S>
+template <typename T>
 class CacheManager{
 public:
-    virtual void insert(string key, const S& item) = 0;
-    virtual const S get(string key) = 0;
+    virtual void insert(string key, const T& item) = 0;
+    virtual T get(string key) = 0;
     virtual bool existSolution(string key) = 0;
-    virtual void foreach(function<void(S&)> func) = 0;
+    virtual void foreach(function<void(T&)> func) = 0;
 };
 
 

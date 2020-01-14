@@ -8,7 +8,6 @@
 #include <iostream>
 #include <unistd.h>
 #include <netinet/in.h>
-#include <cstring>
 
 void SerialServer::open(int port, ClientHandler *clientHandler) {
     //create socket

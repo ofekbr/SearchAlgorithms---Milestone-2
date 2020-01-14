@@ -7,8 +7,7 @@
 
 template <typename P,typename S>
 class Solver{
-    S solve(P problem);
+    virtual S solve(P problem) = 0;
 };
-
 
 #endif //EX4_SOLVER_H
