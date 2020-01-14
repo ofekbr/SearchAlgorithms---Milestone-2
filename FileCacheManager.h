@@ -51,7 +51,7 @@ void FileCacheManager<T>::foreach(const function<void(T&)> func){
 
 template <class T>
 void FileCacheManager<T>::insert(string key, const T& newItem) {
-    m_cache.push_back(newItem);
+    m_cache.push_back(newItem); //TODO cant pushback a single item into an unordered map
     updateInFile(key, newItem);
 }
 
