@@ -10,7 +10,7 @@
 
 using namespace std;
 
-template <typename  T>
+template <typename T>
 class State{
     T m_state;
     double m_cost{};

@@ -17,6 +17,8 @@ using namespace std;
 
 template <typename T>
 T getFromFile(const string&);
+template <typename T>
+void updateInFile(const string& key, const T& item);
 
 
 template <typename T>
