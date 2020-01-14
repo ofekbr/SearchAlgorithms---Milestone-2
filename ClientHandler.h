@@ -28,7 +28,7 @@ public:
     //TODO change from matrix to searchable
     Matrix createProblem(int socket);
     //string = solution
-    void sendSolution(int,string);
+    void sendSolution(int,const string&);
     ~MyTestClientHandler(){
   //      delete(m_cacheManager);
     }

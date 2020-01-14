@@ -20,10 +20,10 @@ using namespace std;
 template <typename S>
 class CacheManager{
 public:
-    virtual void insert(string key, const S& item);
-    virtual const S get(string key);
-    virtual bool existSolution(string key);
-    virtual void foreach(const function<void(S&)> func);
+    virtual void insert(string key, const S& item) = 0;
+    virtual const S get(string key) = 0;
+    virtual bool existSolution(string key) = 0;
+    virtual void foreach(function<void(S&)> func) = 0;
 };
 
 

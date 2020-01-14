@@ -12,8 +12,6 @@ using namespace std;
 
 template <typename  T>
 class State{
-
-
     T m_state;
     double m_cost;
     State<T> *m_cameFrom;

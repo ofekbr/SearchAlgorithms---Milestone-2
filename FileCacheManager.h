@@ -19,7 +19,7 @@ using namespace std;
 template <class T>
 bool isItemInFile(string);
 template <typename T>
-const T getFromFile(string);
+T getFromFile(const string&);
 
 
 template <typename T>
@@ -30,11 +30,11 @@ class FileCacheManager{
 public:
 
     //FileCacheManager<T>(int size):m_capacity(size) {}
-    FileCacheManager<T>(){}
+    FileCacheManager<T>()= default;
     void insert(string key, const T& item);
     bool existSolution(string key);
-    const T get(string key);
-    void foreach(const function<void(T&)> func);
+    T get(string key);
+    void foreach(function<void(T&)> func);
 };
 
 template <class T>
@@ -59,7 +59,7 @@ void FileCacheManager<T>::insert(string key, const T& newItem) {
 }
 
 template <class T>
-const T FileCacheManager<T>::get(string key){
+T FileCacheManager<T>::get(string key){
     auto it = m_cache.find(key);
     //check if in cash:
     if (it != m_cache.end()){
@@ -71,7 +71,7 @@ const T FileCacheManager<T>::get(string key){
 
 //file functions
 template <class T>
-const T getFromFile(string key) {
+T getFromFile(const string& key) {
     T item;
     string s = key +".bin";
     fstream file(s,ios::in | ios::binary);
@@ -86,7 +86,7 @@ const T getFromFile(string key) {
 }
 
 template <class T>
-void updateInFile(string key, const T& item){
+void updateInFile(const string& key, const T& item){
     string s = key +".bin";
     fstream file(s,ios::out | ios::binary);
 
