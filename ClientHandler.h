@@ -22,16 +22,15 @@ class MyTestClientHandler: public ClientHandler{
     FileCacheManager<string> m_cacheManager;
 
 public:
-    MyTestClientHandler(){}
-    void handleClient(int socket);
+    MyTestClientHandler()= default;
+    void handleClient(int socket) override;
     vector<vector<State<pair<int,int>>>> createStateMatrix(vector<vector<int>> vecMatrix, int numRow, int numCol);
     //TODO change from matrix to searchable
     Matrix createProblem(int socket);
     //string = solution
     void sendSolution(int,const string&);
-    ~MyTestClientHandler(){
+    ~MyTestClientHandler() =default;
   //      delete(m_cacheManager);
-    }
 };
 
 

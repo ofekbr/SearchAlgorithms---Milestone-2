@@ -15,21 +15,16 @@ using namespace std;
 #include <fstream>
 #include <functional>
 
-//declaration
-template <class T>
-bool isItemInFile(string);
 template <typename T>
 T getFromFile(const string&);
 
 
 template <typename T>
-class FileCacheManager{
+class FileCacheManager: public CacheManager<T> {
     unordered_map <string,typename list<pair<string,T>>::iterator> m_cache;
     list<pair<string,T>> m_items;
     unsigned int m_capacity = m_cache.size();
 public:
-
-    //FileCacheManager<T>(int size):m_capacity(size) {}
     FileCacheManager<T>()= default;
     void insert(string key, const T& item);
     bool existSolution(string key);
@@ -98,6 +93,5 @@ void updateInFile(const string& key, const T& item){
         file.write((char*)& item, sizeof(item));
     }
 }
-
 
 #endif //EX4_FILECACHEMANAGER_H
