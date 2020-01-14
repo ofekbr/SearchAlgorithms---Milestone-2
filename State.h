@@ -12,23 +12,25 @@ using namespace std;
 
 template <typename  T>
 class State{
-
-
     T m_state;
-    double m_cost;
+    double m_cost{};
     State<T> *m_cameFrom;
 public:
-    State(T state){
+    explicit State(T state){
         m_state = state;
     }
+
     void setCost(double cost){
         m_cost = cost;
     }
-    bool equals(State<T> state){
-        return (this->equals(state));
+
+    void setCameFrom(State<T> *mCameFrom) {
+        m_cameFrom = mCameFrom;
     }
 
-
+    bool equals(State<T> state){
+        return (this->m_state == state.m_state);
+    }
 };
 
 #endif //EX4_STATE_H

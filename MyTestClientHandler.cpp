@@ -28,6 +28,7 @@ void MyTestClientHandler::handleClient(int socket) {
     }
     sendSolution(socket,"solution----------------555");
     //sendSolution(socket,solution);
+    close(socket);
 }
 
 //TODO change to searchable
@@ -59,7 +60,7 @@ Matrix MyTestClientHandler::createProblem(int socket){
             read(socket, buffer, 1);
         }
 
-        value = stod(curNum);
+        value = stoi(curNum);
         numCol++;
         curRow.push_back(value);
         fill(curNum, curNum + i, 0);
@@ -87,14 +88,11 @@ Matrix MyTestClientHandler::createProblem(int socket){
         }
     }
 
-
     vector<vector<State<pair<int,int>>>> matrixOfState = createStateMatrix(matrix, numRow-1,firstNumCol);
-
 
     //creating a searchable object- matrix
     State<pair<int,int>> startState = pair <int, int> (start.at(0),start.at(1));
     State<pair<int,int>> goalState = pair <int, int> (goal.at(0),goal.at(1));
-
 
     //cost is the value in the specific point
     startState.setCost(matrix[start.at(0)][start.at(1)]);
@@ -104,8 +102,6 @@ Matrix MyTestClientHandler::createProblem(int socket){
     problem.serialize(matrixName);
 
     return problem;
-
-
 }
 
 
@@ -116,10 +112,10 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
     vector<State<pair<int,int>>> rowOfState;
 
     //iterating over the vector of vector
-    for(vector<vector<int>>::iterator itRow = vecMatrix.begin(); itRow != vecMatrix.end(); ++itRow) {
+    for(auto itRow = vecMatrix.begin(); itRow != vecMatrix.end(); ++itRow) {
         //iterating in row over every number
 
-        for (vector<int>::iterator it = itRow->begin(); it != itRow->end(); ++it){
+        for (auto it = itRow->begin(); it != itRow->end(); ++it){
             State<pair<int,int>> state = pair <int, int> (i,j);
             state.setCost(*it);
 
@@ -134,7 +130,7 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
     return matrixOfState;
 }
 
-void MyTestClientHandler::sendSolution(int client_socket, string solution) {
+void MyTestClientHandler::sendSolution(int client_socket, const string& solution) {
 
     const char* message;
     message = solution.c_str();

@@ -47,7 +47,6 @@ void SerialServer::open(int port, ClientHandler *clientHandler) {
         }
 
         clientHandler->handleClient(client_socket);
-        close(client_socket);
         stop();
     }
     close(socketfd); //closing the listening socket

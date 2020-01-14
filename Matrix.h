@@ -37,7 +37,7 @@ public:
     string getMatrixName(){
         return m_matrixName;
     }
-    string serialize(string str){
+    string serialize(const string& str){
         //hash to matrix
         hash<string> hashStr;
         m_matrixName = hashStr(str);
