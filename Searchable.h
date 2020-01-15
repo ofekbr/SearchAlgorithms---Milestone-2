@@ -11,14 +11,10 @@
 
 template <typename T>
 class Searchable {
-    string m_matrixName;
-    State<pair<int,int>> m_initialState;
-    State<pair<int,int>> m_goalState;
-    vector<vector<State<pair<int,int>>>> m_matrix;
 public:
-    virtual State<T>* getInitialState() = 0;
+    virtual State<T> getInitialState() = 0;
     virtual State<T> getGoalState() = 0;
-    virtual list<State<T>> getAllPossibleStates(State<T> s) = 0;
+    virtual vector<State<pair<int,int>>*> getAllPossibleStates(State<T> s) = 0;
 };
 
 #endif //EX4_SEARCHABLE_H
