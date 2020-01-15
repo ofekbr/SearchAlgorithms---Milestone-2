@@ -18,20 +18,21 @@ void MyTestClientHandler::handleClient(int socket) {
 
 //TODO fix getmatrixname - either add it to the searchable interface of keep the name somewhere else
     Searchable<pair<int,int>> *problem = createProblem(socket);
+
     string solution;
-    if (m_cacheManager.existSolution(problem.getMatrixName())){
-        solution = m_cacheManager.get(problem.getMatrixName());
-    } else {
+//    if (m_cacheManager.existSolution(problem.getMatrixName())){
+//        solution = m_cacheManager.get(problem.getMatrixName());
+//    } else {
         //search solution
         //solution = solver.solve(BFS(),problem);
         //m_cacheManager.insert(problem.getMatrixName(), solution);
-    }
+ //   }
     sendSolution(socket,"solution----------------555");
     //sendSolution(socket,solution);
     close(socket);
 }
 
-Searchable<pair<int,int>> MyTestClientHandler::createProblem(int socket){
+Searchable<pair<int,int>>* MyTestClientHandler::createProblem(int socket){
 
     char buffer[1] = {0}, curNum[100] = {0};
     int numRow=0, numCol = 0, firstNumCol=0;
@@ -97,8 +98,8 @@ Searchable<pair<int,int>> MyTestClientHandler::createProblem(int socket){
     startState.setCost(matrix[start.at(0)][start.at(1)]);
     goalState.setCost(matrix[goal.at(0)][goal.at(1)]);
 
-    Matrix problem(startState,goalState, matrixOfState);
-    problem.serialize(matrixName);
+    Matrix<pair<int,int>>* problem = new Matrix<pair<int,int>>(startState,goalState, matrixOfState);
+    problem->serialize(matrixName);
 
     return problem;
 }

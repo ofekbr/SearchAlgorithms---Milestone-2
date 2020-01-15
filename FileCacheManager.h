@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#include <unordered_map>
+#include <unordered_set>
 #include <list>
 #include <algorithm>
 #include <string>
@@ -23,8 +23,7 @@ void updateInFile(const string& key, const T& item);
 
 template <typename T>
 class FileCacheManager: public CacheManager<T> {
-    unordered_map <string,typename list<pair<string,T>>::iterator> m_cache;
-    list<pair<string,T>> m_items;
+    unordered_set <string> m_cache;
     unsigned int m_capacity = m_cache.size();
 public:
     FileCacheManager<T>()= default;
@@ -43,15 +42,15 @@ bool FileCacheManager<T>::existSolution(string key) {
 
 template <class T>
 void FileCacheManager<T>::foreach(const function<void(T&)> func){
-    typename list<pair<string,T>>::iterator it;
-    for(it = m_items.begin(); it != m_items.end(); ++it){
+   /* typename list<pair<string,T>>::iterator it;
+    for(it = m_cache.begin(); it != m_cache.end(); ++it){
         func(it->second);
-    }
+    }*/
 }
 
 template <class T>
 void FileCacheManager<T>::insert(string key, const T& newItem) {
-    m_cache.push_back(newItem); //TODO cant pushback a single item into an unordered map
+    //m_cache.push_back(newItem); //TODO cant pushback a single item into an unordered map
     updateInFile(key, newItem);
 }
 
