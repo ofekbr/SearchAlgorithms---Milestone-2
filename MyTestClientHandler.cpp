@@ -16,8 +16,8 @@ using namespace std;
 
 void MyTestClientHandler::handleClient(int socket) {
 
-
-    Matrix problem = createProblem(socket);
+//TODO fix getmatrixname - either add it to the searchable interface of keep the name somewhere else
+    Searchable<pair<int,int>> *problem = createProblem(socket);
     string solution;
     if (m_cacheManager.existSolution(problem.getMatrixName())){
         solution = m_cacheManager.get(problem.getMatrixName());
@@ -31,8 +31,7 @@ void MyTestClientHandler::handleClient(int socket) {
     close(socket);
 }
 
-//TODO change to searchable
-Matrix MyTestClientHandler::createProblem(int socket){
+Searchable<pair<int,int>> MyTestClientHandler::createProblem(int socket){
 
     char buffer[1] = {0}, curNum[100] = {0};
     int numRow=0, numCol = 0, firstNumCol=0;
@@ -116,7 +115,7 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
         //iterating in row over every number
 
         for (auto it = itRow->begin(); it != itRow->end(); ++it){
-            State<pair<int,int>> state = pair <int, int> (i,j);
+            State<pair<int,int>> state(pair <int, int> (i,j));
             state.setCost(*it);
 
             rowOfState.push_back(state);

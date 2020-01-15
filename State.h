@@ -31,6 +31,10 @@ public:
     bool equals(State<T> state){
         return (this->m_state == state.m_state);
     }
+
+    T getPos() {
+        return m_state;
+    }
 };
 
 #endif //EX4_STATE_H

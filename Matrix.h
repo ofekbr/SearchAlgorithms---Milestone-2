@@ -9,8 +9,10 @@
 #include <utility>
 #include <vector>
 #include <functional>
+#include "Searchable.h"
 
-class Matrix{
+template <typename T>
+class Matrix : public Searchable<T>{
     string m_matrixName;
     State<pair<int,int>> m_initialState;
     State<pair<int,int>> m_goalState;
@@ -29,8 +31,28 @@ public:
         return m_goalState.equals(state);
     }
 
-    vector<State<pair<int,int>>> getAllPossibleStates(State<pair<int,int>>){
-        //all neighbors?
+    vector<State<pair<int,int>>> getAllPossibleStates(State<pair<int,int>> state){
+        vector<State<pair<int,int>>> neighbors;
+        State<pair<int, int>> *up, *down, *left, *right;
+        int row = state.getPos().first;
+        int col = state.getPos().second;
+        try {
+            up = m_matrix.at(row-1).at(col);
+            neighbors.push_back(*up);
+        } catch (out_of_range &exp) {}
+        try {
+            down = m_matrix.at(row + 1).at(col);
+            neighbors.push_back(*down);
+        } catch (out_of_range &exp) {}
+        try {
+            left = m_matrix.at(row).at(col - 1);
+            neighbors.push_back(*left);
+        } catch (out_of_range &exp) {}
+        try {
+            right = m_matrix.at(row).at(col + 1);
+            neighbors.push_back(*right);
+        } catch (out_of_range &exp) {}
+        return neighbors;
     }
 
     //class function
