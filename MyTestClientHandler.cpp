@@ -24,7 +24,7 @@ void MyTestClientHandler::handleClient(int socket) {
 //        solution = m_cacheManager.get(problem.getMatrixName());
 //    } else {
         //search solution
-        //solution = solver.solve(BFS(),problem);
+        //solution = solver.solve(BestFS(),problem);
         //m_cacheManager.insert(problem.getMatrixName(), solution);
  //   }
     sendSolution(socket,"solution----------------555");
@@ -117,7 +117,7 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
 
         for (auto it = itRow->begin(); it != itRow->end(); ++it){
             State<pair<int,int>> state(pair <int, int> (i,j));
-            state.setCost(*it);
+            state.setValue(*it);
 
             rowOfState.push_back(state);
             ++i;

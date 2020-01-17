@@ -11,23 +11,25 @@
 #include <functional>
 #include "Searchable.h"
 
+
+
 template <typename T>
 class Matrix : public Searchable<T>{
     string m_matrixName;
-    State<pair<int,int>> m_initialState;
-    State<pair<int,int>> m_goalState;
-    vector<vector<State<pair<int,int>>>> m_matrix;
+    State<T> m_initialState;
+    State<T> m_goalState;
+    vector<vector<State<T>>> m_matrix;
 
 public:
     //interface function
-    Matrix(State<pair<int,int>> initialState, State<pair<int,int>> goalState, vector<vector<State<pair<int,int>>>> matrix)
+    Matrix(State<T> initialState, State<T> goalState, vector<vector<State<T>>> matrix)
         :m_initialState(std::move(initialState)),m_goalState(std::move(goalState)), m_matrix(std::move(matrix)){};
 
     State<pair<int,int>> getInitialState(){
         return m_initialState;
     }
 
-    bool isGoalState(State<pair<int,int>> state){
+    bool isGoalState(State<T> state){
         return m_goalState.equals(state);
     }
 
@@ -36,25 +38,29 @@ public:
     }
 
 
-    vector<State<pair<int,int>>*> getAllPossibleStates(State<pair<int,int>> state) override{
-        vector<State<pair<int,int>>*> neighbors;
-        State<pair<int, int>> *up, *down, *left, *right;
+    vector<State<T>*> getAllPossibleStates(State<T> state) override{//TODO FIX
+        vector<State<T>*> neighbors;
+        State<T> *up, *down, *left, *right;
         int row = state.getPos().first;
         int col = state.getPos().second;
         try {
             up = &m_matrix.at(row-1).at(col);
+            up->setCameFromPlacement("UP");
             neighbors.push_back(up);
         } catch (out_of_range &exp) {}
         try {
             down = &m_matrix.at(row + 1).at(col);
+            down->setCameFromPlacement("DOWN");
             neighbors.push_back(down);
         } catch (out_of_range &exp) {}
         try {
             left = &m_matrix.at(row).at(col - 1);
+            left->setCameFromPlacement("LEFT");
             neighbors.push_back(left);
         } catch (out_of_range &exp) {}
         try {
             right = &m_matrix.at(row).at(col + 1);
+            right->setCameFromPlacement("RIGHT");
             neighbors.push_back(right);
         } catch (out_of_range &exp) {}
         return neighbors;

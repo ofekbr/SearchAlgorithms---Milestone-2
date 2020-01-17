@@ -17,7 +17,7 @@ public:
 
 
 class MyTestClientHandler: public ClientHandler{
-//    Solver<P,S> m_solver;
+    Solver<Matrix<pair<int,int>>,string> *m_solver;
     //string = solution
     FileCacheManager<string> m_cacheManager;
 
@@ -31,8 +31,5 @@ public:
     ~MyTestClientHandler() =default;
   //      delete(m_cacheManager);
 };
-
-
-
 
 #endif //EX4_CLIENTHANDLER_H
