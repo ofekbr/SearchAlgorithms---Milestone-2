@@ -4,9 +4,13 @@
 
 #include "SerialServer.h"
 #include "ClientHandler.h"
+#include "ObjectAdapter.h"
+#include "BestFS.h"
 
 int main(int argc, char const *argv[]) {
     SerialServer server;
     MyTestClientHandler ch;
+
     server.open(12345, &ch);
+
 }
