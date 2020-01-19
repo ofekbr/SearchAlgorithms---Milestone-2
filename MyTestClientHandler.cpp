@@ -5,6 +5,7 @@
 #include "CacheManager.h"
 #include "ClientHandler.h"
 #include "Matrix.h"
+#include "Searcher.h"
 #include <unistd.h>
 #include <deque>
 #include <string>
@@ -98,8 +99,10 @@ Searchable<pair<int,int>>* MyTestClientHandler::createProblem(int socket){
     startState.setCost(matrix[start.at(0)][start.at(1)]);
     goalState.setCost(matrix[goal.at(0)][goal.at(1)]);
 
-    Matrix<pair<int,int>>* problem = new Matrix<pair<int,int>>(startState,goalState, matrixOfState);
-    problem->serialize(matrixName);
+    auto problem = new Matrix<pair<int,int>>(startState,goalState, matrixOfState);
+    hash<string> hashStr;
+    std::size_t temp = hashStr(matrixName);
+    problem->setMMatrixName(temp);
 
     return problem;
 }
@@ -116,9 +119,9 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
         //iterating in row over every number
 
         for (auto it = itRow->begin(); it != itRow->end(); ++it){
-            State<pair<int,int>> state(pair <int, int> (i,j));
+            State<pair<int,int>> state(pair <int, int> (j,i));
             state.setValue(*it);
-
+            state.setCost(0);
             rowOfState.push_back(state);
             ++i;
         }

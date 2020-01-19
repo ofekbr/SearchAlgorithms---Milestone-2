@@ -17,12 +17,14 @@ public:
 
 
 class MyTestClientHandler: public ClientHandler{
-    Solver<Matrix<pair<int,int>>,string> *m_solver;
+    Solver<Searchable<pair<int, int>>*, string> *m_solver;
     //string = solution
     FileCacheManager<string> m_cacheManager;
 
 public:
-    MyTestClientHandler()= default;
+    explicit MyTestClientHandler(Solver<Searchable<pair<int,int>>*,string> *solver){
+        m_solver = solver;
+    }
     void handleClient(int socket) override;
     vector<vector<State<pair<int,int>>>> createStateMatrix(vector<vector<int>> vecMatrix, int numRow, int numCol);
     Searchable<pair<int,int>>* createProblem(int socket);

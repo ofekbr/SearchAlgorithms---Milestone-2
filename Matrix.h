@@ -38,32 +38,36 @@ public:
     }
 
 
-    vector<State<T>*> getAllPossibleStates(State<T> state) override{//TODO FIX
-        vector<State<T>*> neighbors;
+    vector<State<T>> getAllPossibleStates(State<T> state) override{//TODO FIX
+        vector<State<T>> neighbors;
         State<T> *up, *down, *left, *right;
         int row = state.getPos().first;
         int col = state.getPos().second;
         try {
             up = &m_matrix.at(row-1).at(col);
             up->setCameFromPlacement("UP");
-            neighbors.push_back(up);
+            neighbors.push_back(*up);
         } catch (out_of_range &exp) {}
         try {
             down = &m_matrix.at(row + 1).at(col);
             down->setCameFromPlacement("DOWN");
-            neighbors.push_back(down);
+            neighbors.push_back(*down);
         } catch (out_of_range &exp) {}
         try {
             left = &m_matrix.at(row).at(col - 1);
             left->setCameFromPlacement("LEFT");
-            neighbors.push_back(left);
+            neighbors.push_back(*left);
         } catch (out_of_range &exp) {}
         try {
             right = &m_matrix.at(row).at(col + 1);
             right->setCameFromPlacement("RIGHT");
-            neighbors.push_back(right);
+            neighbors.push_back(*right);
         } catch (out_of_range &exp) {}
         return neighbors;
+    }
+
+    void setMMatrixName(const size_t &mMatrixName) {
+        m_matrixName = to_string(mMatrixName);
     }
 
     //class function
@@ -73,7 +77,9 @@ public:
     string serialize(const string& str){
         //hash to matrix
         hash<string> hashStr;
+        std::size_t temp = hashStr(str);
         m_matrixName = hashStr(str);
+        int f = 5;
     }
 
 };

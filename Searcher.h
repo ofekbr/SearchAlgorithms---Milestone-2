@@ -6,7 +6,7 @@
 #define EX4_SEARCHER_H
 
 template <typename P, typename S>
-class Searcher{
+class Searcher {
 public:
     virtual S search(P problem) = 0;
 };

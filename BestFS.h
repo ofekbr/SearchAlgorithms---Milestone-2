@@ -9,76 +9,79 @@
 #include "Searcher.h"
 #include "Searchable.h"
 #include "State.h"
-#include <queue>
-#include "unordered_set"
 #include "MyPriorityQueue.h"
+#include <algorithm>
 
 using namespace std;
 
-template <typename T>
-class BestFS: public Searcher<Searchable<pair<int,int>>, string>{
-    MyPriorityQueue<State<T>> openList;
-    int m_numOfNodes;
+template <class T, class S>
+class BestFS: public Searcher<Searchable<T>*, S> {
+    //MyPriorityQueue<pair<int,int>> openList;
+    MyQueue<State<T>> openList;
+    int m_numOfNodes = 0;
 public:
-    string search(Searchable<T> problem) override;
-    string backTrace(State<T>);
+    S search(Searchable<T> *problem) override;
+    static S backTrace(State<T>);
     int evaluatedNodes();
 };
 
 
-template <class T>
-int BestFS<T>::evaluatedNodes() {
+template <class T, class S>
+int BestFS<T, S>::evaluatedNodes() {
     return m_numOfNodes;
 }
-template<class T>
-string BestFS<T>::backTrace(State<T> state) {
-    string solution;
+
+template <class T, class S>
+S BestFS<T, S>::backTrace(State<T> state) {
+    S solution;
     while(state.cameFrom() != nullptr){
-        solution += state.getCameFromPlacement() +"(" + state.getCost() + ")";
-        state = state.cameFrom();
+        solution += state.getCameFromPlacement() +"(" + to_string(state.getCost()) + ")";
+        state = *state.cameFrom();
     }
     return solution;
 }
-template<typename T>
-string BestFS<T>::search(Searchable<T> problem) {
+
+template <class T, class S>
+S BestFS<T, S>::search(Searchable<T> *problem) {
     m_numOfNodes = 0;
-    unordered_set<State<T>> closed;
-    openList.insert(problem.getInitialState());
+    set<State<T>> closed;
+    openList.push(problem->getInitialState());
     while (openList.size() > 0) {
         m_numOfNodes++;
-        State<T> n = openList.popMin();
-        closed.insert(n); //so we wont check again
+        State<T> n = openList.top();
+        openList.pop();
 
-        if (problem.getGoalState().equals(n)) {
-            string solution = backTrace(n);
+        //so we wont check again
+        if (problem->getGoalState().equals(n)) {
+            S solution = backTrace(n);
             return solution;
         }
         //create n's successor
-        list<State<T>> neighbors = problem.getAllPossibleStates(n);
+        vector<State<T>> neighbors = problem->getAllPossibleStates(n);
+
         //for each successor do:
         for (auto successor = neighbors.begin(); successor != neighbors.end(); successor++) {
-            auto inClosed = closed.find(*successor);
+            auto inClosed = find(neighbors.begin(), neighbors.end(),*successor);
             //if successor is not in closed and not in open
             if (inClosed == neighbors.end() && !openList.contains(*successor)) {
                 //update that we came to it from n
-                *successor.setCameFrom(n);
-                *successor.setCost(n.getCost() + *successor.getValue());
+                (*successor).setCameFrom(&n);
+                (*successor).setCost(n.getCost() + (*successor).getValue());
                 openList.push(*successor);
-            } else if((n.getCost()+ *successor.getValue() < *successor.getCost())){ // if the new path is better than previous one
+            } else if(((n.getCost() + (*successor).getValue()) < (*successor).getCost())){ // if the new path is better than previous one
                 //if it is not in the open add it to the open
                 if(!openList.contains(*successor)){
                     openList.push(*successor);
                 } else {
                     //adjust its priority
-                    openList.find(*successor).setCost(n.getCost() + *successor.getValue());
-                    openList.find(*successor).setCameFrom(n);
+                    openList.find(*successor).setCost(n.getCost() + (*successor).getValue());
+                    openList.find(*successor).setCameFrom(&n);
                 }
             }
         }
     }
-    return string();
+    throw "bestFS failed";
 }
-
 
 
 #endif //EX4_BESTFS_H

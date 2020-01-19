@@ -22,7 +22,7 @@ public:
         m_state = state;
     }
 
-    void setCameFromPlacement(string placment) {
+    void setCameFromPlacement(const string& placment) {
         m_cameFromPlacement = placment;
     }
     string getCameFromPlacement() {
@@ -35,7 +35,7 @@ public:
         m_value = value;
     }
 
-    State<T> cameFrom(){
+    State<T>* cameFrom(){
         return m_cameFrom;
     }
     void setCameFrom(State<T> *mCameFrom) {
@@ -45,7 +45,7 @@ public:
     double getValue() {
         return m_value;
     }
-    double getCost(){
+    double getCost() const{
         return m_cost;
     }
     bool equals(State<T> state){
@@ -56,8 +56,13 @@ public:
         return m_state;
     }
 
-    bool operator<(State<T> c1){
-        return (this->m_cost < c1.m_cost);
+
+    friend bool operator<(const State<T> &c1, const State<T> &c2){
+        return (c1.m_cost < c2.m_cost);
+    }
+
+    friend bool operator==(const State<T> &c1, const State<T> &c2){
+        return c1.m_state == c2.m_state;
     }
 
 };
