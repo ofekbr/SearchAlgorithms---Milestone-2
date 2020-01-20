@@ -9,13 +9,12 @@
 #include <set>
 #include <algorithm>
 #include <queue>
-//TODO template <typename T>
 
-#include <queue>
+
 template<
         class T,
         class Container = std::vector<T>,
-        class Compare = std::less<typename Container::value_type>
+        class Compare = std::greater<typename Container::value_type >
 > class MyQueue : public std::priority_queue<T, Container, Compare>
 {
 public:
@@ -25,6 +24,9 @@ public:
             Container,
             Compare>::container_type::const_iterator const_iterator;
 
+    T top(const T&val) const {
+        
+    }
     T find(const T&val) const
     {
         auto first = this->c.cbegin();

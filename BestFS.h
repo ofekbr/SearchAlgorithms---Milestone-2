@@ -17,7 +17,7 @@ using namespace std;
 template <class T, class S>
 class BestFS: public Searcher<Searchable<T>*, S> {
     //MyPriorityQueue<pair<int,int>> openList;
-    MyQueue<State<T>> openList;
+    MyQueue<State<T>*> openList;
     int m_numOfNodes = 0;
 public:
     S search(Searchable<T> *problem) override;
@@ -44,38 +44,43 @@ S BestFS<T, S>::backTrace(State<T> state) {
 template <class T, class S>
 S BestFS<T, S>::search(Searchable<T> *problem) {
     m_numOfNodes = 0;
-    set<State<T>> closed;
+    set<State<T>*> closed;
     openList.push(problem->getInitialState());
     while (openList.size() > 0) {
         m_numOfNodes++;
-        State<T> n = openList.top();
+        State<T> *n = openList.top();
         openList.pop();
+        cout << n->getPos().first << n->getPos().second <<endl;
+        closed.insert(n);
 
         //so we wont check again
-        if (problem->getGoalState().equals(n)) {
-            S solution = backTrace(n);
+        if (problem->isGoalState(*n)) {
+            S solution = backTrace(*n);
             return solution;
         }
         //create n's successor
-        vector<State<T>> neighbors = problem->getAllPossibleStates(n);
+        vector<State<T>*> neighbors = problem->getAllPossibleStates(*n);
 
         //for each successor do:
-        for (auto successor = neighbors.begin(); successor != neighbors.end(); successor++) {
-            auto inClosed = find(neighbors.begin(), neighbors.end(),*successor);
-            //if successor is not in closed and not in open
-            if (inClosed == neighbors.end() && !openList.contains(*successor)) {
+        for (auto neigh = neighbors.begin(); neigh != neighbors.end(); neigh++) {
+            auto inClosed = closed.find(*neigh);
+            //if neigh is not in closed and not in open
+            cout << (*neigh)->getPos().first << (*neigh)->getPos().second << endl;
+
+            if (inClosed == closed.end() && !openList.contains(*neigh)) {
                 //update that we came to it from n
-                (*successor).setCameFrom(&n);
-                (*successor).setCost(n.getCost() + (*successor).getValue());
-                openList.push(*successor);
-            } else if(((n.getCost() + (*successor).getValue()) < (*successor).getCost())){ // if the new path is better than previous one
+                (*neigh)->setCameFrom(n);
+                (*neigh)->setCost(n->getCost() + (*neigh)->getValue());
+                openList.push(*neigh);
+            } else if(((n->getCost() + (*neigh)->getValue()) < (*neigh)->getCost())){ // if the new path is better than previous one
                 //if it is not in the open add it to the open
-                if(!openList.contains(*successor)){
-                    openList.push(*successor);
+                if(!openList.contains(*neigh)){
+                    openList.push(*neigh);
                 } else {
                     //adjust its priority
-                    openList.find(*successor).setCost(n.getCost() + (*successor).getValue());
-                    openList.find(*successor).setCameFrom(&n);
+                    openList.find(*neigh)->setCost(n->getCost() + (*neigh)->getValue());
+                    openList.find(*neigh)->setCameFrom(n);
+                    //openList.find(*neigh)->setCameFromPlacement()
                 }
             }
         }

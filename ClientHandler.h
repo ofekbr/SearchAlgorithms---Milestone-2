@@ -18,7 +18,6 @@ public:
 
 class MyTestClientHandler: public ClientHandler{
     Solver<Searchable<pair<int, int>>*, string> *m_solver;
-    //string = solution
     FileCacheManager<string> m_cacheManager;
 
 public:

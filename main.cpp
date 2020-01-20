@@ -9,6 +9,7 @@
 #include <utility>
 
 int main(int argc, char const *argv[]) {
+
     SerialServer server;
 
     Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
