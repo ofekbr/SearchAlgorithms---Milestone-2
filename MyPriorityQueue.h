@@ -6,58 +6,58 @@
 #define EX4_MYPRIORITYQUEUE_H
 
 #include "State.h"
-#include <queue>
 #include <set>
-template <typename T>
-class MyPriorityQueue : public priority_queue<State<T>> {
+#include <algorithm>
+#include <queue>
 
-    multiset<State<T>> m_priorityQueue;
 
+template<
+        class T,
+        class Container = std::vector<T>,
+        class Compare = std::greater<typename Container::value_type >
+> class MyQueue : public std::priority_queue<T, Container, Compare>
+{
 public:
-    State<T> find(State<T> state) {
-        return *m_priorityQueue.find(state);
-    };
+    typedef typename
+    std::priority_queue<
+            T,
+            Container,
+            Compare>::container_type::const_iterator const_iterator;
 
-    void insert(State<T> state){
-        m_priorityQueue.insert(state);
-    };
-    State<T> topMin(State<T>) {
-        // Get the minimum element
-        typename multiset<State<T>>::iterator minElement = m_priorityQueue.begin();
-        typename multiset<State<T>>::iterator it;
-
-        for(it = m_priorityQueue.begin(); it != m_priorityQueue.end(); ++it) {
-            if (*it < *minElement){
-                minElement = it;
-            }
+    T find(const T&val) const
+    {
+        auto first = this->c.cbegin();
+        auto last = this->c.cend();
+        while (first!=last) {
+            if (*first==val) return *first;
+            ++first;
         }
-
-        // return the minimum element
-        return *minElement;
-    };
-    State<T> popMin(State<T> state) {
-        typename multiset<State<T>>::iterator minElement = m_priorityQueue.begin();
-        typename multiset<State<T>>::iterator it;
-
-        for(it = m_priorityQueue.begin(); it != m_priorityQueue.end(); ++it) {
-            if (*it < *minElement){
-                minElement = it;
-            }
-        }
-        //delete from queue
-        m_priorityQueue.erase(it);
-        //return min
-        return *minElement;
-    };
-    int size(){
-        return m_priorityQueue.size();
-    }
-    bool contains(State<T> state) {
-        auto it = m_priorityQueue.find(state);
-        return (it != m_priorityQueue.end());
+        return *last;
     }
 
+    bool contains(const T&val) const {
+        auto first = this->c.cbegin();
+        auto last = this->c.cend();
+        while (first!=last) {
+            if (*first==val) return true;
+            ++first;
+        }
+        return (last != this->c.cend());
+
+    }
 };
 
 
+/*
+class MyPriorityQueue:public priority_queue<pair<int,int>>{
+    //multiset<State<pair<int,int>>> m_priorityQueue;
+public:
+    State<pair<int,int>> find(State<pair<int,int>> state);
+    //void insert(State<pair<int,int>> state);
+    //State<pair<int,int>> popMin();
+    //int size();
+    bool contains(State<pair<int,int>> state);
+};
+
+*/
 #endif //EX4_MYPRIORITYQUEUE_H

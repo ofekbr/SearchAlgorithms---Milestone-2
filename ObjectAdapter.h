@@ -9,12 +9,14 @@
 #include "Solver.h"
 #include "Searcher.h"
 
-template<typename P, typename  S>
+template<class P, class  S>
 class ObjectAdapter: public Solver<P,S> {
-Searcher<P,S> m_searcher;
+Searcher<P,S> *m_searcher;
 public:
-    ObjectAdapter(const Searcher <P, S> &searcher) : m_searcher(searcher) {}
-    S solve(P problem) override ;
+    explicit ObjectAdapter(Searcher <P, S> *searcher) : m_searcher(searcher) {}
+    S solve(P problem) override {
+        return m_searcher->search(problem);
+    }
 };
 
 

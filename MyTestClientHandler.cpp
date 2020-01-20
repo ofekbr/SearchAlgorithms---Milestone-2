@@ -5,6 +5,7 @@
 #include "CacheManager.h"
 #include "ClientHandler.h"
 #include "Matrix.h"
+#include "Searcher.h"
 #include <unistd.h>
 #include <deque>
 #include <string>
@@ -24,10 +25,10 @@ void MyTestClientHandler::handleClient(int socket) {
 //        solution = m_cacheManager.get(problem.getMatrixName());
 //    } else {
         //search solution
-        //solution = solver.solve(BestFS(),problem);
+        solution = m_solver->solve(problem);
         //m_cacheManager.insert(problem.getMatrixName(), solution);
  //   }
-    sendSolution(socket,"solution----------------555");
+    sendSolution(socket,solution);
     //sendSolution(socket,solution);
     close(socket);
 }
@@ -90,16 +91,20 @@ Searchable<pair<int,int>>* MyTestClientHandler::createProblem(int socket){
 
     vector<vector<State<pair<int,int>>>> matrixOfState = createStateMatrix(matrix, numRow-1,firstNumCol);
 
+
     //creating a searchable object- matrix
-    State<pair<int,int>> startState(pair<int,int>(start.at(0),start.at(1)));
-    State<pair<int,int>> goalState(pair <int, int> (goal.at(0),goal.at(1)));
-
+    auto problem = new Matrix<pair<int,int>>(matrixOfState);
+    //create start and goal states
+    State<pair<int,int>> *startState = &(problem->getMatrix()->at(start.at(0)).at(start.at(1)));
+    State<pair<int,int>> *goalState = &(problem->getMatrix()->at(goal.at(0)).at(goal.at(1)));
     //cost is the value in the specific point
-    startState.setCost(matrix[start.at(0)][start.at(1)]);
-    goalState.setCost(matrix[goal.at(0)][goal.at(1)]);
+    startState->setCost(matrix[start.at(0)][start.at(1)]);
+    problem->setStartGoal(startState, goalState);
+    //create a name to matrix with hash
+    hash<string> hashStr;
+    std::size_t temp = hashStr(matrixName);
+    problem->setMatrixName(temp);
 
-    Matrix<pair<int,int>>* problem = new Matrix<pair<int,int>>(startState,goalState, matrixOfState);
-    problem->serialize(matrixName);
 
     return problem;
 }
@@ -116,9 +121,9 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
         //iterating in row over every number
 
         for (auto it = itRow->begin(); it != itRow->end(); ++it){
-            State<pair<int,int>> state(pair <int, int> (i,j));
+            State<pair<int,int>> state(pair <int, int> (j,i));
             state.setValue(*it);
-
+            state.setCost(0);
             rowOfState.push_back(state);
             ++i;
         }
