@@ -24,9 +24,6 @@ public:
             Container,
             Compare>::container_type::const_iterator const_iterator;
 
-    T top(const T&val) const {
-        
-    }
     T find(const T&val) const
     {
         auto first = this->c.cbegin();
