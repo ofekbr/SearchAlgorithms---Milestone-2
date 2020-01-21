@@ -2,8 +2,8 @@
 // Created by shani on 15/01/2020.
 //
 
-#ifndef EX4_MYPRIORITYQUEUE_H
-#define EX4_MYPRIORITYQUEUE_H
+#ifndef EX4_MYQUEUE_H
+#define EX4_MYQUEUE_H
 
 #include "State.h"
 #include <set>
@@ -23,6 +23,8 @@ public:
             T,
             Container,
             Compare>::container_type::const_iterator const_iterator;
+
+    //explicit MyQueue(const Compare &x) : priority_queue<T, Container, Compare>(x) {}
 
     T find(const T&val) const
     {
@@ -46,7 +48,14 @@ public:
 
     }
 };
-
+/*
+template <class T>
+struct StateCompere {
+    bool operator()(const State<T>&left, const State<T>&right) {
+        return left.getCost() < right.getCost();
+    }
+};
+*/
 
 /*
 class MyPriorityQueue:public priority_queue<pair<int,int>>{
@@ -60,4 +69,4 @@ public:
 };
 
 */
-#endif //EX4_MYPRIORITYQUEUE_H
+#endif //EX4_MYQUEUE_H
