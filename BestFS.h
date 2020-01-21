@@ -16,7 +16,6 @@ using namespace std;
 
 template <class T, class S>
 class BestFS: public Searcher<Searchable<T>*, S> {
-    //MyPriorityQueue<pair<int,int>> openList;
     MyQueue<State<T>*> openList;
     int m_numOfNodes = 0;
 public:

@@ -63,21 +63,21 @@ public:
         try {
             down = &m_matrix.at(row + 1).at(col);
             down->setCameFromPlacement("DOWN");
-            if (up->getValue() >= 0){
+            if (down->getValue() >= 0){
                 neighbors.push_back(down);
             }
         } catch (out_of_range &exp) {}
         try {
             left = &m_matrix.at(row).at(col - 1);
             left->setCameFromPlacement("LEFT");
-            if (up->getValue() >= 0){
+            if (left->getValue() >= 0){
                 neighbors.push_back(left);
             }
         } catch (out_of_range &exp) {}
         try {
             right = &m_matrix.at(row).at(col + 1);
             right->setCameFromPlacement("RIGHT");
-            if (up->getValue() >= 0){
+            if (right->getValue() >= 0){
                 neighbors.push_back(right);
             }
         } catch (out_of_range &exp) {}
@@ -89,15 +89,28 @@ public:
     }
 
     //class function
-    string getMatrixName(){
+    string getName(){
         return m_matrixName;
     }
+
     string serialize(const string& str){
         //hash to matrix
         hash<string> hashStr;
         m_matrixName = hashStr(str);
         int f = 5;
     }
+
+    void updateCost(int cost){
+
+        //iterating over the vector of vector
+        for(auto itRow = m_matrix.begin(); itRow != m_matrix.end(); ++itRow) {
+            //iterating in row over every number
+            for (auto it = itRow->begin(); it != itRow->end(); ++it){
+                (*it).setCost(cost);
+            }
+        }
+
+    };
 
 };
 #endif //EX4_MATRIX_H

@@ -28,29 +28,22 @@ class FileCacheManager: public CacheManager<T> {
 public:
     FileCacheManager<T>()= default;
     void insert(string key, const T& item);
-    bool existSolution(string key);
+    bool solutionExist(string key);
     T get(string key);
     void foreach(function<void(T&)> func);
 };
 
 template <class T>
-bool FileCacheManager<T>::existSolution(string key) {
+bool FileCacheManager<T>::solutionExist(string key) {
     //check if in cash:
     auto it = m_cache.find(key);
     return (it != m_cache.end());
 }
 
-template <class T>
-void FileCacheManager<T>::foreach(const function<void(T&)> func){
-   /* typename list<pair<string,T>>::iterator it;
-    for(it = m_cache.begin(); it != m_cache.end(); ++it){
-        func(it->second);
-    }*/
-}
 
 template <class T>
 void FileCacheManager<T>::insert(string key, const T& newItem) {
-    //m_cache.push_back(newItem); //TODO cant pushback a single item into an unordered map
+    m_cache.insert(newItem);
     updateInFile(key, newItem);
 }
 

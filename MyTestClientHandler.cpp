@@ -17,17 +17,16 @@ using namespace std;
 
 void MyTestClientHandler::handleClient(int socket) {
 
-//TODO fix getmatrixname - either add it to the searchable interface of keep the name somewhere else
     Searchable<pair<int,int>> *problem = createProblem(socket);
 
     string solution;
-//    if (m_cacheManager.existSolution(problem.getMatrixName())){
-//        solution = m_cacheManager.get(problem.getMatrixName());
-//    } else {
+    if (m_cacheManager.solutionExist(problem->getName())){
+        solution = m_cacheManager.get(problem->getName());
+    } else {
         //search solution
         solution = m_solver->solve(problem);
-        //m_cacheManager.insert(problem.getMatrixName(), solution);
- //   }
+        m_cacheManager.insert(problem->getName(), solution);
+    }
     sendSolution(socket,solution);
     //sendSolution(socket,solution);
     close(socket);
