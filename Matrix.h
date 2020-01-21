@@ -48,7 +48,7 @@ public:
     }
 
 
-    vector<State<T>*> getAllPossibleStates(State<T> state) override{//TODO FIX
+    vector<State<T>*> getAllPossibleStates(State<T> state) override{
         vector<State<T>*> neighbors;
         State<T> *up, *down, *left, *right;
         int row = state.getPos().first;
@@ -63,21 +63,21 @@ public:
         try {
             down = &m_matrix.at(row + 1).at(col);
             down->setCameFromPlacement("DOWN");
-            if (up->getValue() >= 0){
+            if (down->getValue() >= 0){
                 neighbors.push_back(down);
             }
         } catch (out_of_range &exp) {}
         try {
             left = &m_matrix.at(row).at(col - 1);
             left->setCameFromPlacement("LEFT");
-            if (up->getValue() >= 0){
+            if (left->getValue() >= 0){
                 neighbors.push_back(left);
             }
         } catch (out_of_range &exp) {}
         try {
             right = &m_matrix.at(row).at(col + 1);
             right->setCameFromPlacement("RIGHT");
-            if (up->getValue() >= 0){
+            if (right->getValue() >= 0){
                 neighbors.push_back(right);
             }
         } catch (out_of_range &exp) {}

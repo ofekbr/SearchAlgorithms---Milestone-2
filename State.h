@@ -34,7 +34,7 @@ public:
     void setValue(int value) {
         m_value = value;
     }
-    State<T>* cameFrom(){
+    State<T>* getCameFrom(){
         return m_cameFrom;
     }
     void setCameFrom(State<T> *mCameFrom) {

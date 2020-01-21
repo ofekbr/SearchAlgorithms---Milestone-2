@@ -9,13 +9,12 @@
 #include <utility>
 
 int main(int argc, char const *argv[]) {
-
     SerialServer server;
 
     Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
 
     ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(bestFs);
     MyTestClientHandler ch(&objectAdapter);
-    server.open(12345, &ch);
-
+    server.open(12346, &ch);
+    cout << "excecution ended" << endl;
 }
