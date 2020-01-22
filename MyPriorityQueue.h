@@ -2,8 +2,8 @@
 // Created by shani on 15/01/2020.
 //
 
-#ifndef EX4_MYPRIORITYQUEUE_H
-#define EX4_MYPRIORITYQUEUE_H
+#ifndef EX4_MYQUEUE_H
+#define EX4_MYQUEUE_H
 
 #include "State.h"
 #include <set>
@@ -23,6 +23,8 @@ public:
             T,
             Container,
             Compare>::container_type::const_iterator const_iterator;
+
+    //explicit MyQueue(const Compare &x) : priority_queue<T, Container, Compare>(x) {}
 
     T find(const T&val) const
     {
@@ -46,18 +48,4 @@ public:
 
     }
 };
-
-
-/*
-class MyPriorityQueue:public priority_queue<pair<int,int>>{
-    //multiset<State<pair<int,int>>> m_priorityQueue;
-public:
-    State<pair<int,int>> find(State<pair<int,int>> state);
-    //void insert(State<pair<int,int>> state);
-    //State<pair<int,int>> popMin();
-    //int size();
-    bool contains(State<pair<int,int>> state);
-};
-
-*/
 #endif //EX4_MYPRIORITYQUEUE_H

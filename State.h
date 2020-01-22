@@ -15,6 +15,7 @@ class State{
     T m_state;
     int m_cost;
     int m_value;
+    int m_f;
     State<T> *m_cameFrom = nullptr;
     string m_cameFromPlacement;
 public:
@@ -34,6 +35,15 @@ public:
     void setValue(int value) {
         m_value = value;
     }
+
+    void setF(int f) {
+        m_f = f;
+    }
+    int getF(){
+        return m_f;
+    }
+
+
     State<T>* cameFrom(){
         return m_cameFrom;
     }
