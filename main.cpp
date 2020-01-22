@@ -16,10 +16,10 @@ int main(int argc, char const *argv[]) {
     SerialServer server;
 
     //Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
-    Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
-    //Searcher<Searchable<pair<int,int>>*,string> *Bfs = new BFS<pair<int,int>, string>();
+    //Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
+    Searcher<Searchable<pair<int,int>>*,string> *Bfs = new BFS<pair<int,int>, string>();
 
-    ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Dfs);
+    ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Bfs);
     MyTestClientHandler ch(&objectAdapter);
     server.open(12345, &ch);
 

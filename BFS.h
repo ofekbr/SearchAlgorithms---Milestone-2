@@ -33,17 +33,62 @@ S backTrace(State<T> state) {
 }
 
 template <class T, class S>
-S BFS<T,S>::backTrace(State<T> *goal) {
+S BFS<T,S>::backTrace(State<T> *state) {
 
+    S solution, direction;
+    int dx, dy;
+    int valuePath = 0;
+    list<string> trace;
+    State<T>* state2 = state;
+    vector<State<T>*> path;
+
+    path.push_back(state2);
+    while (state2->cameFrom() != nullptr){
+        path.push_back(state2->cameFrom());
+        state2 = state2->cameFrom();
+    }
+
+    // saving path from source to destination
+    while(!path.empty()){
+        State<T>* lastElement = path.back();
+        valuePath += lastElement->getValue();
+        lastElement->setCost(valuePath);
+        path.pop_back();
+    }
+
+    while(state->cameFrom() != nullptr) {
+        State<T> *prev = state->cameFrom();
+        dx = prev->getPos().first - state->getPos().first;
+        dy = prev->getPos().second - state->getPos().second;
+        if (dx == 0) {
+            if (dy == 1) {
+                direction = "LEFT";
+            } else {
+                direction = "RIGHT";
+            }
+        } else if (dx == 1) {
+            direction = "UP";
+        } else if (dx == -1) {
+            direction = "DOWN";
+        }
+        trace.push_back(direction + "(" + to_string(state->getCost()) + ")");
+        state = state->cameFrom();
+    }
+    for (int i = trace.size(); i > 0; i--) {
+        solution += trace.back();
+        trace.pop_back();
+    }
+    return solution;
+/*
     S solution;
 
     // vector path stores the shortest path
     vector<State<T>*> path;
-    path.push_back(goal);
+    path.push_back(state);
 
-    while (goal->cameFrom() != nullptr){
-        path.push_back(goal->cameFrom());
-        goal = goal->cameFrom();
+    while (state->cameFrom() != nullptr){
+        path.push_back(state->cameFrom());
+        state = state->cameFrom();
     }
     int valuePath = 0;
 
@@ -54,7 +99,9 @@ S BFS<T,S>::backTrace(State<T> *goal) {
         solution += path.back()->getCameFromPlacement() + "(" + to_string(valuePath) + ")";
         path.pop_back();
     }
+
     return solution;
+    */
 }
 
 
