@@ -9,7 +9,7 @@
 #include "Searcher.h"
 #include "Searchable.h"
 #include "StatePtrCompare.h"
-#include "MyPriorityQueue.h"
+#include "MyQueue.h"
 #include <set>
 #include <cmath>
 template <class T, class S>

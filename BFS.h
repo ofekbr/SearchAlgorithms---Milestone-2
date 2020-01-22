@@ -43,9 +43,9 @@ S BFS<T,S>::backTrace(State<T> *state) {
     vector<State<T>*> path;
 
     path.push_back(state2);
-    while (state2->cameFrom() != nullptr){
-        path.push_back(state2->cameFrom());
-        state2 = state2->cameFrom();
+    while (state2->getCameFrom() != nullptr){
+        path.push_back(state2->getCameFrom());
+        state2 = state2->getCameFrom();
     }
 
     // saving path from source to destination
@@ -56,8 +56,8 @@ S BFS<T,S>::backTrace(State<T> *state) {
         path.pop_back();
     }
 
-    while(state->cameFrom() != nullptr) {
-        State<T> *prev = state->cameFrom();
+    while(state->getCameFrom() != nullptr) {
+        State<T> *prev = state->getCameFrom();
         dx = prev->getPos().first - state->getPos().first;
         dy = prev->getPos().second - state->getPos().second;
         if (dx == 0) {
@@ -72,7 +72,7 @@ S BFS<T,S>::backTrace(State<T> *state) {
             direction = "DOWN";
         }
         trace.push_back(direction + "(" + to_string(state->getCost()) + ")");
-        state = state->cameFrom();
+        state = state->getCameFrom();
     }
     for (int i = trace.size(); i > 0; i--) {
         solution += trace.back();
