@@ -24,8 +24,6 @@ public:
             Container,
             Compare>::container_type::const_iterator const_iterator;
 
-    //explicit MyQueue(const Compare &x) : priority_queue<T, Container, Compare>(x) {}
-
     T find(const T&val) const
     {
         auto first = this->c.cbegin();
@@ -48,25 +46,4 @@ public:
 
     }
 };
-/*
-template <class T>
-struct StateCompere {
-    bool operator()(const State<T>&left, const State<T>&right) {
-        return left.getCost() < right.getCost();
-    }
-};
-*/
-
-/*
-class MyPriorityQueue:public priority_queue<pair<int,int>>{
-    //multiset<State<pair<int,int>>> m_priorityQueue;
-public:
-    State<pair<int,int>> find(State<pair<int,int>> state);
-    //void insert(State<pair<int,int>> state);
-    //State<pair<int,int>> popMin();
-    //int size();
-    bool contains(State<pair<int,int>> state);
-};
-
-*/
-#endif //EX4_MYQUEUE_H
+#endif //EX4_MYPRIORITYQUEUE_H
