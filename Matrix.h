@@ -89,15 +89,28 @@ public:
     }
 
     //class function
-    string getMatrixName(){
+    string getName(){
         return m_matrixName;
     }
+
     string serialize(const string& str){
         //hash to matrix
         hash<string> hashStr;
         m_matrixName = hashStr(str);
         int f = 5;
     }
+
+    void updateCost(int cost){
+
+        //iterating over the vector of vector
+        for(auto itRow = m_matrix.begin(); itRow != m_matrix.end(); ++itRow) {
+            //iterating in row over every number
+            for (auto it = itRow->begin(); it != itRow->end(); ++it){
+                (*it).setCost(cost);
+            }
+        }
+
+    };
 
 };
 #endif //EX4_MATRIX_H

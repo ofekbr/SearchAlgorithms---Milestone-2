@@ -53,6 +53,7 @@ public:
         return m_state;
     }
 
+    //TODO maybe delete?
     friend bool operator<(const State<T> &c1, const State<T> &c2){
         return (c1.m_cost < c2.m_cost);
     }

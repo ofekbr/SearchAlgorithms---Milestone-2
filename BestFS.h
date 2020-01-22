@@ -53,13 +53,9 @@ S BestFS<T, S>::backTrace(State<T>* state) {
             direction = "DOWN";
         }
         trace.push_back(direction +"(" + to_string(state->getCost()) + ")");
-        //solution += direction +"(" + to_string(state->getCost()) + ")";
-        //solution += state.getCameFromPlacement() +"(" + to_string(state.getCost()) + ")";
         state = state->getCameFrom();
     }
-    /*for (auto iter =  trace.end()--; iter != trace.begin() ; iter--) {
-        solution += trace;
-    }*/
+
     for (int i = trace.size(); i > 0; i--) {
         solution += trace.back();
         trace.pop_back();
@@ -69,23 +65,14 @@ S BestFS<T, S>::backTrace(State<T>* state) {
 
 template <class T, class S>
 S BestFS<T, S>::search(Searchable<T> *problem) {
-
-    /*auto compare = [](State<T>& left, State<T>& right) {
-        return left.getCost() < right.getCost();
-    };*/
-
-    //MyQueue<State<T>*, std::vector<T>, decltype(compare)> openList(compare);
-
-
     m_numOfNodes = 0;
     set<State<T>*> closed;
     openList.push(problem->getInitialState());
-    //openList.push(problem->getInitialState());
     while (openList.size() > 0) {
         m_numOfNodes++;
         State<T> *n = openList.top();
         openList.pop();
-        //cout << n->getPos().first << n->getPos().second <<endl;
+        cout << n->getPos().first << n->getPos().second <<endl;
         closed.insert(n);
 
         //so we wont check again
@@ -100,7 +87,6 @@ S BestFS<T, S>::search(Searchable<T> *problem) {
         for (auto neigh = neighbors.begin(); neigh != neighbors.end(); neigh++) {
             auto inClosed = closed.find(*neigh);
             //if neigh is not in closed and not in open
-            //cout << (*neigh)->getPos().first << (*neigh)->getPos().second << endl;
 
             if (inClosed == closed.end() && !openList.contains(*neigh)) {
                 //update that we came to it from n
@@ -115,7 +101,6 @@ S BestFS<T, S>::search(Searchable<T> *problem) {
                     //adjust its priority
                     openList.find(*neigh)->setCost(n->getCost() + (*neigh)->getValue());
                     openList.find(*neigh)->setCameFrom(n);
-                    //openList.find(*neigh)->setCameFromPlacement()
                 }
             }
         }
