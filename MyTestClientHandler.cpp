@@ -28,7 +28,6 @@ void MyTestClientHandler::handleClient(int socket) {
         m_cacheManager.insert(problem->getName(), solution);
     }
     sendSolution(socket,solution);
-    //sendSolution(socket,solution);
     close(socket);
 }
 

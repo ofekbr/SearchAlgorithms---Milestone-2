@@ -8,16 +8,19 @@
 #include "BestFS.h"
 #include "DFS.h"
 #include "BFS.h"
+#include "AStar.h"
 #include <utility>
 
 int main(int argc, char const *argv[]) {
     SerialServer server;
 
-    Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
+    //Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
     //Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
     //Searcher<Searchable<pair<int,int>>*,string> *Bfs = new BFS<pair<int,int>, string>();
+    Searcher<Searchable<pair<int,int>>*,string> *Astar = new AStar<pair<int,int>, string>();
 
-    ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(bestFs);
+    //ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(bestFs);
+    ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Astar);
     MyTestClientHandler ch(&objectAdapter);
     server.open(12345, &ch);
 
