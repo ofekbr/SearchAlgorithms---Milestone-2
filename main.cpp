@@ -2,26 +2,11 @@
 // Created by ofeks on 12/01/2020.
 //
 
-#include "SerialServer.h"
-#include "ClientHandler.h"
-#include "ObjectAdapter.h"
-#include "BestFS.h"
-#include "DFS.h"
-#include "BFS.h"
-#include "AStar.h"
-#include <utility>
+
+#include "Boot.h"
+using namespace boot;
 
 int main(int argc, char const *argv[]) {
-    SerialServer server;
-
-    //Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
-    //Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
-    //Searcher<Searchable<pair<int,int>>*,string> *Bfs = new BFS<pair<int,int>, string>();
-    Searcher<Searchable<pair<int,int>>*,string> *Astar = new AStar<pair<int,int>, string>();
-
-    //ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(bestFs);
-    ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Astar);
-    MyTestClientHandler ch(&objectAdapter);
-    server.open(12345, &ch);
-
+        Main m;
+        m.main(argv[1]);
 }
