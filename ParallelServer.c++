@@ -1,16 +1,12 @@
 //
-// Created by ofeks on 12/01/2020.
+// Created by ofeks on 25/01/2020.
 //
 
-#include "SerialServer.h"
-#include "ClientHandler.h"
-#include <sys/socket.h>
-#include <iostream>
-#include <unistd.h>
-#include <netinet/in.h>
+#include "ParallelServer.h"
 
-void SerialServer::open(int port, ClientHandler *clientHandler) {
-    //create socket
+
+void ParallelServer::open(int port, ClientHandler *clientHandler) {
+//create socket
     int client_socket;
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
@@ -27,7 +23,7 @@ void SerialServer::open(int port, ClientHandler *clientHandler) {
 
     //setting timeout - still needed to be tested
     struct timeval tv{};
-    tv.tv_sec = 25;
+    tv.tv_sec = 20;
     tv.tv_usec = 0;
     setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
@@ -42,21 +38,38 @@ void SerialServer::open(int port, ClientHandler *clientHandler) {
     } else {
         std::cout << "Server is now listening ..." << std::endl;
     }
-    while (server_holder) {
+    while (true) {
         // accepting a client
         client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
 
         if (client_socket == -1) {
-            std::cerr << "Error accepting client" << std::endl;
-            stop();
-            //return;
+            std::cerr << "Timeout during accept - server socket" << std::endl;
+            this->stop();
+            break;
         }
 
-        clientHandler->handleClient(client_socket);
+        runningThreads++;
+        /*
+        std::thread t([this, client_socket, clientHandler]{
+            clientHandler->handleClient(client_socket);
+            runningThreads--;
+        });
+         */
+
+        clients.emplace_back([this, client_socket, clientHandler]{
+            clientHandler->handleClient(client_socket);
+            runningThreads--;
+        });
     }
     close(socketfd); //closing the listening socket
 }
 
-void SerialServer::stop() {
-    server_holder = false;
+void ParallelServer::stop() {
+    while (runningThreads > 0) {
+        sleep(2);
+    }
+    for (auto & client : clients) {
+        client.join();
+    }
 }
+

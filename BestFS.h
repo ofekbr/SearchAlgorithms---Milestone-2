@@ -72,7 +72,6 @@ S BestFS<T, S>::search(Searchable<T> *problem) {
         m_numOfNodes++;
         State<T> *n = openList.top();
         openList.pop();
-        cout << n->getPos().first << n->getPos().second <<endl;
         closed.insert(n);
 
         //so we wont check again

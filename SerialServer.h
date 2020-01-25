@@ -10,7 +10,7 @@
 class SerialServer : public Server {
     bool server_holder = true;
 public:
-    SerialServer();
+    SerialServer() = default;
     void open(int port, ClientHandler *clientHandler) override;
     void stop() override;
 };
