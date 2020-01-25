@@ -13,7 +13,7 @@
 
 int main(int argc, char const *argv[]) {
     ParallelServer server;
-
+    //SerialServer server;
     Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
     //Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
     //Searcher<Searchable<pair<int,int>>*,string> *Bfs = new BFS<pair<int,int>, string>();

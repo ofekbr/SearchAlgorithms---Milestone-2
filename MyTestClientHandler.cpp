@@ -22,12 +22,12 @@ void MyTestClientHandler::handleClient(int socket) {
     string solution;
     if (m_cacheManager.solutionExist(problem->getName())){
         solution = m_cacheManager.get(problem->getName());
-        cout << "found in file";
+        cout << "found in file" << endl;
     } else {
         //search solution
         solution = m_solver->solve(problem);
         m_cacheManager.insert(problem->getName(), solution);
-        cout << "solved";
+        cout << "solved" << endl;
     }
     sendSolution(socket,solution);
     //sendSolution(socket,solution);

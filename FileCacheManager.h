@@ -43,7 +43,7 @@ bool FileCacheManager<T>::solutionExist(string key) {
 
 template <class T>
 void FileCacheManager<T>::insert(string key, const T& newItem) {
-    m_cache.insert(newItem);
+    m_cache.insert(key);
     updateInFile(key, newItem);
 }
 
@@ -51,7 +51,7 @@ template <class T>
 T FileCacheManager<T>::get(string key){
     auto it = m_cache.find(key);
     //check if in cash:
-    if (it != m_cache.end()){
+    if (it == m_cache.end()){
         throw "doesn't exist in files";
     } else {
         return getFromFile<T>(key);
@@ -62,30 +62,41 @@ T FileCacheManager<T>::get(string key){
 template <class T>
 T getFromFile(const string& key) {
     T item;
-    string s = key +".bin";
-    fstream file(s,ios::in | ios::binary);
-
+    //string s = key +".bin";
+    string s = key +".txt";
+    //fstream file(s,ios::in | ios::binary);
+    fstream file(s,ios::in);
     //read from file
     if (!file) {
         throw "can't open file";
     } else{
-        file.read((char*)&item,sizeof(item));
+        std::ifstream stream(s);
+        //stream >> item;
+        //stream.read(item, 3000);
+        //stream.getline(item);
+        std::getline(stream, item);
+        //file.read((char*)&item,sizeof(item));
         return item;
     }
 }
 
 template <class T>
 void updateInFile(const string& key, const T& item){
-    string s = key +".bin";
-    fstream file(s,ios::out | ios::binary);
+    //string s = key +".bin";
+    string s = key +".txt";
+    //fstream file(s,ios::out | ios::binary);
+    fstream file(s,ios::out);
 
     //write to file
     if (!file) {
         //the key is not in file
         throw "can't open file";
     } else{
-        file.write((char*)& item, sizeof(item));
+        //file.write((char*)& item, sizeof(item));
+        std::ofstream out(s);
+        out << item.c_str();
     }
+
 }
 
 #endif //EX4_FILECACHEMANAGER_H

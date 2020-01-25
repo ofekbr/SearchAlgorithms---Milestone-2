@@ -27,7 +27,7 @@ void SerialServer::open(int port, ClientHandler *clientHandler) {
 
     //setting timeout - still needed to be tested
     struct timeval tv{};
-    tv.tv_sec = 5;
+    tv.tv_sec = 25;
     tv.tv_usec = 0;
     setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
@@ -48,11 +48,11 @@ void SerialServer::open(int port, ClientHandler *clientHandler) {
 
         if (client_socket == -1) {
             std::cerr << "Error accepting client" << std::endl;
-            return;
+            stop();
+            //return;
         }
 
         clientHandler->handleClient(client_socket);
-        stop();
     }
     close(socketfd); //closing the listening socket
 }
