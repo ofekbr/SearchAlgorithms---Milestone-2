@@ -43,6 +43,23 @@ public:
             ++first;
         }
         return (last != this->c.cend());
+    }
+
+    void update(const T&updatedState) {
+        vector<T> statesTillUpdate;
+        T temp = this->top();
+
+        while (temp != updatedState) {
+            this->pop();
+            statesTillUpdate.push_back(temp);
+            temp = this->top();
+        }
+        this->pop();
+        statesTillUpdate.push_back(updatedState);
+         while (!statesTillUpdate.empty()) {
+             this->push(statesTillUpdate.back());
+             statesTillUpdate.pop_back();
+         }
 
     }
 };

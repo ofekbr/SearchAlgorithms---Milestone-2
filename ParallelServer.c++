@@ -23,7 +23,7 @@ void ParallelServer::open(int port, ClientHandler *clientHandler) {
 
     //setting timeout - still needed to be tested
     struct timeval tv{};
-    tv.tv_sec = 20;
+    tv.tv_sec = 200;
     tv.tv_usec = 0;
     setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
@@ -49,15 +49,9 @@ void ParallelServer::open(int port, ClientHandler *clientHandler) {
         }
 
         runningThreads++;
-        /*
-        std::thread t([this, client_socket, clientHandler]{
-            clientHandler->handleClient(client_socket);
-            runningThreads--;
-        });
-         */
 
         clients.emplace_back([this, client_socket, clientHandler]{
-            clientHandler->handleClient(client_socket);
+            clientHandler->clone()->handleClient(client_socket);
             runningThreads--;
         });
     }

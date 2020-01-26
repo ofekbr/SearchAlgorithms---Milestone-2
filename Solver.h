@@ -9,6 +9,7 @@ template <typename Problem,typename Solution>
 class Solver{
 public:
     virtual Solution solve(Problem problem) = 0;
+    virtual Solver* clone() = 0;
 };
 
 #endif //EX4_SOLVER_H

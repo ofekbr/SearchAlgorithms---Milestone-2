@@ -14,6 +14,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <functional>
+#include <mutex>
 
 template <typename T>
 T getFromFile(const string&);
@@ -30,7 +31,6 @@ public:
     void insert(string key, const T& item);
     bool solutionExist(string key);
     T get(string key);
-    void foreach(function<void(T&)> func);
 };
 
 template <class T>
@@ -62,29 +62,21 @@ T FileCacheManager<T>::get(string key){
 template <class T>
 T getFromFile(const string& key) {
     T item;
-    //string s = key +".bin";
     string s = key +".txt";
-    //fstream file(s,ios::in | ios::binary);
     fstream file(s,ios::in);
     //read from file
     if (!file) {
         throw "can't open file";
     } else{
         std::ifstream stream(s);
-        //stream >> item;
-        //stream.read(item, 3000);
-        //stream.getline(item);
         std::getline(stream, item);
-        //file.read((char*)&item,sizeof(item));
         return item;
     }
 }
 
 template <class T>
 void updateInFile(const string& key, const T& item){
-    //string s = key +".bin";
     string s = key +".txt";
-    //fstream file(s,ios::out | ios::binary);
     fstream file(s,ios::out);
 
     //write to file
@@ -92,11 +84,9 @@ void updateInFile(const string& key, const T& item){
         //the key is not in file
         throw "can't open file";
     } else{
-        //file.write((char*)& item, sizeof(item));
         std::ofstream out(s);
         out << item.c_str();
     }
-
 }
 
 #endif //EX4_FILECACHEMANAGER_H

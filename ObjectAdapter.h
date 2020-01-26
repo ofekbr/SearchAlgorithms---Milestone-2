@@ -17,6 +17,9 @@ public:
     S solve(P problem) override {
         return m_searcher->search(problem);
     }
+    ObjectAdapter<P,S>* clone() {
+        return new ObjectAdapter(m_searcher->clone());
+    }
 };
 
 

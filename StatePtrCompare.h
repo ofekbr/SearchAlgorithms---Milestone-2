@@ -15,4 +15,5 @@ struct StatePtrCompare {
     }
     ~StatePtrCompare()= default;
 };
+
 #endif //EX4_STATEPTRCOMPARE_H

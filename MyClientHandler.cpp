@@ -5,7 +5,6 @@
 #include "CacheManager.h"
 #include "ClientHandler.h"
 #include "Matrix.h"
-#include "Searcher.h"
 #include <unistd.h>
 #include <deque>
 #include <string>
@@ -15,7 +14,9 @@
 
 using namespace std;
 
-void MyTestClientHandler::handleClient(int socket) {
+FileCacheManager<string> MyClientHandler::m_cacheManager;
+
+void MyClientHandler::handleClient(int socket) {
 
     Searchable<pair<int,int>> *problem = createProblem(socket);
 
@@ -35,7 +36,7 @@ void MyTestClientHandler::handleClient(int socket) {
     close(socket);
 }
 
-Searchable<pair<int,int>>* MyTestClientHandler::createProblem(int socket){
+Searchable<pair<int,int>>* MyClientHandler::createProblem(int socket){
 
     char buffer[1] = {0}, curNum[100] = {0};
     int numRow=0, numCol = 0, firstNumCol=0;
@@ -112,7 +113,7 @@ Searchable<pair<int,int>>* MyTestClientHandler::createProblem(int socket){
 }
 
 
-vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vector<vector<int>> vecMatrix, int numRow, int numCol){
+vector<vector<State<pair<int,int>>>> MyClientHandler::createStateMatrix(vector<vector<int>> vecMatrix, int numRow, int numCol){
     int i = 0, j=0;
 
     vector<vector<State<pair<int,int>>>> matrixOfState;
@@ -137,7 +138,7 @@ vector<vector<State<pair<int,int>>>> MyTestClientHandler::createStateMatrix(vect
     return matrixOfState;
 }
 
-void MyTestClientHandler::sendSolution(int client_socket, const string& solution) {
+void MyClientHandler::sendSolution(int client_socket, const string& solution) {
 
     const char* message;
     message = solution.c_str();

@@ -13,15 +13,16 @@
 class ClientHandler{
 public:
     virtual void handleClient(int socket) = 0;
+    virtual ClientHandler* clone() = 0;
 };
 
 
-class MyTestClientHandler: public ClientHandler{
+class MyClientHandler: public ClientHandler{
     Solver<Searchable<pair<int, int>>*, string> *m_solver;
-    FileCacheManager<string> m_cacheManager;
+    static FileCacheManager<string> m_cacheManager;
 
 public:
-    explicit MyTestClientHandler(Solver<Searchable<pair<int,int>>*,string> *solver){
+    explicit MyClientHandler(Solver<Searchable<pair<int,int>>*,string> *solver){
         m_solver = solver;
     }
     void handleClient(int socket) override;
@@ -29,8 +30,12 @@ public:
     Searchable<pair<int,int>>* createProblem(int socket);
     //string = solution
     void sendSolution(int,const string&);
-    ~MyTestClientHandler() =default;
-  //      delete(m_cacheManager);
+    ~MyClientHandler() =default;
+
+    ClientHandler *clone() {
+        return new MyClientHandler(m_solver->clone());
+    }
+    //      delete(m_cacheManager);
 };
 
 #endif //EX4_CLIENTHANDLER_H
