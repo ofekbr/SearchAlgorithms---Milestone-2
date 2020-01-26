@@ -17,10 +17,10 @@ using namespace std;
 
 template <class T, class S>
 class BestFS: public Searcher<Searchable<T>*, S> {
-    //MyQueue<State<T>*> openList;
     MyQueue<State<T>*, std::vector<State<T>*>, StatePtrCompare<T>> openList;
     int m_numOfNodes = 0;
 public:
+    State<T>* m_goal;
     S search(Searchable<T> *problem) override;
     static S backTrace(State<T>*);
     int evaluatedNodes();
@@ -65,6 +65,7 @@ S BestFS<T, S>::backTrace(State<T>* state) {
 
 template <class T, class S>
 S BestFS<T, S>::search(Searchable<T> *problem) {
+    m_goal = problem->getGoalState();
     m_numOfNodes = 0;
     set<State<T>*> closed;
     openList.push(problem->getInitialState());
