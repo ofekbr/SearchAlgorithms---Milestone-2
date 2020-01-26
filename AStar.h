@@ -24,8 +24,14 @@ public:
     S search(Searchable<T> *problem) override;
     static S backTrace(State<T>*);
     int evaluatedNodes();
+    AStar<T,S>* clone();
 };
 
+
+template <class T, class S>
+AStar<T,S>* AStar<T,S>::clone() {
+    return new AStar<T,S>;
+}
 
 template <class T, class S>
 int AStar<T, S>::evaluatedNodes() {
@@ -34,7 +40,6 @@ int AStar<T, S>::evaluatedNodes() {
 
 template <class T, class S>
 S AStar<T, S>::backTrace(State<T>* state) {
-
     S solution, direction;
     int dx, dy;
     list<string> trace;
@@ -102,6 +107,7 @@ S AStar<T, S>::search(Searchable<T> *problem) {
                     //adjust its priority
                     openList.find(*neigh)->setCost(n->getCost() + (*neigh)->getValue());
                     openList.find(*neigh)->setCameFrom(n);
+                    openList.update(*neigh);
                 }
             }
         }

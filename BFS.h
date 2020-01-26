@@ -20,7 +20,13 @@ public:
     S search(Searchable<T> *problem) override;
     static S backTrace(State<T>*);
     int evaluatedNodes();
+    BFS<T,S>* clone();
 };
+
+template <class T, class S>
+BFS<T,S>* BFS<T,S>::clone() {
+    return new BFS<T,S>;
+}
 
 template <class T, class S>
 int BFS<T, S>::evaluatedNodes() {

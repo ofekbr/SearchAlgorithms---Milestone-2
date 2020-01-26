@@ -21,7 +21,15 @@ public:
     S search(Searchable<T> *problem) override;
     int evaluatedNodes();
     S backTrace(State<T> *state);
+    DFS<T,S>* clone();
 };
+
+template <class T, class S>
+DFS<T,S>* DFS<T,S>::clone() {
+    return new DFS<T,S>;
+}
+
+
 
 template<class T,class S>
 S DFS<T,S>::search(Searchable<T> *problem){

@@ -16,6 +16,7 @@
 #include "DFS.h"
 #include "BFS.h"
 #include "AStar.h"
+#include "ParallelServer.h"
 #include <utility>
 
 namespace boot {
@@ -28,7 +29,7 @@ public:
     Main(){};
     ~Main(){};
     int main(string port) {
-        SerialServer server;
+        ParallelServer server;
 
         //Searcher<Searchable<pair<int,int>>*,string> *bestFs = new BestFS<pair<int,int>, string>();
         //Searcher<Searchable<pair<int,int>>*,string> *Dfs = new DFS<pair<int,int>, string>();
@@ -37,9 +38,10 @@ public:
 
         //ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(bestFs);
         ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Astar);
-        MyTestClientHandler ch(&objectAdapter);
+        MyClientHandler ch(&objectAdapter);
         server.open(stod(port), &ch);
-
+        int num = Astar->evaluatedNodes();
+        cout<< num << endl;
     };
 };
 

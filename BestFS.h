@@ -24,8 +24,14 @@ public:
     S search(Searchable<T> *problem) override;
     static S backTrace(State<T>*);
     int evaluatedNodes();
+    BestFS<T,S>* clone();
 };
 
+
+template <class T, class S>
+BestFS<T,S>* BestFS<T,S>::clone() {
+    return new BestFS<T,S>;
+}
 
 template <class T, class S>
 int BestFS<T, S>::evaluatedNodes() {
@@ -101,6 +107,7 @@ S BestFS<T, S>::search(Searchable<T> *problem) {
                     //adjust its priority
                     openList.find(*neigh)->setCost(n->getCost() + (*neigh)->getValue());
                     openList.find(*neigh)->setCameFrom(n);
+                    openList.update(neigh);
                 }
             }
         }

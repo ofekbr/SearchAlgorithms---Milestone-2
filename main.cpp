@@ -6,6 +6,9 @@
 using namespace boot;
 
 int main(int argc, char const *argv[]) {
-        Main m;
-        m.main(argv[1]);
+    Main m;
+    m.main(argv[1]);
+
+
+
 }
