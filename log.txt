@@ -1,0 +1,318 @@
+commit 163c561ddcdd453fa42105e3ffd1ebf6522263ad
+Merge: f0a4813 5fed0f6
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Mon Jan 27 00:15:57 2020 +0200
+
+    Merge pull request #13 from ofekbr/Final_Ex4
+    
+    Final ex4
+
+commit 5fed0f6d0278ed45cd0de4c369c2c3955a17dd38
+Author: shani-b <shanib93@gmail.com>
+Date:   Sun Jan 26 20:22:17 2020 +0200
+
+    give us 100 plzplzplz
+
+commit 8551f6bc43d1353dae5eb6e07510374cadf44ecf
+Merge: f0a4813 2228b21
+Author: shani-b <shanib93@gmail.com>
+Date:   Sun Jan 26 17:59:21 2020 +0200
+
+    Merge remote-tracking branch 'remotes/origin/Boot'
+    
+    # Conflicts:
+    #       CMakeLists.txt
+    #       MyTestClientHandler.cpp
+    #       main.cpp
+
+commit f0a481385ae6120491753c9b0638f99af32577b7
+Merge: de28ab5 20ffc8e
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Sun Jan 26 00:47:54 2020 +0200
+
+    Merge pull request #12 from ofekbr/Parallelserver
+    
+    Parallelserver
+
+commit 20ffc8e593e3498322e7540b154fdbf505b0f22b
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Sun Jan 26 00:45:55 2020 +0200
+
+    parallel working - need thread debug
+
+commit cfd43c5d1a29f5bf803e0c0566cee2bb9ec8279a
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Sat Jan 25 21:37:49 2020 +0200
+
+    parallel working
+
+commit 2228b219b484088c0a397c4f794e1c5c81aae8ed
+Author: shani-b <shanib93@gmail.com>
+Date:   Thu Jan 23 11:50:35 2020 +0200
+
+    Boot
+
+commit f2bc9306a13ec597980a570af6b9221325b1d833
+Author: shani-b <shanib93@gmail.com>
+Date:   Thu Jan 23 11:40:58 2020 +0200
+
+    Astar done
+
+commit 2e9fa16c15849a9d98e0632562847a6895e5ae07
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 18:10:02 2020 +0200
+
+    before changing bestFS
+
+commit de28ab581b066b8881c984437747d5feedd8d9df
+Merge: 0a32d8c 444389f
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Wed Jan 22 17:16:56 2020 +0200
+
+    Merge pull request #11 from ofekbr/AStar2
+    
+    A star2
+
+commit 444389f81e1bc18cdd455000025f7fcab8f1c6a4
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 17:15:13 2020 +0200
+
+    DFS,BFS,AStar
+
+commit b4972ec3e48f33a4c18adb7b123ad394c51be8e1
+Merge: 0a32d8c 9b9511f
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 17:12:51 2020 +0200
+
+    Merge remote-tracking branch 'remotes/origin/AStar'
+    
+    # Conflicts:
+    #       BestFS.h
+    #       CMakeLists.txt
+    #       MyQueue.h
+    #       State.h
+    #       StatePtrCompare.h
+    #       main.cpp
+
+commit 9b9511fff812bd95e6161c68b1ab373856db0fd0
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 16:59:52 2020 +0200
+
+    DFS,BFS
+
+commit df216bec8b7463ea6863f3ef2b53b9739f384da1
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 02:10:16 2020 +0200
+
+    DFS,BFS finish
+
+commit 9f7ffab457b51685e1e58afb86cb260b51842735
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 22 01:17:28 2020 +0200
+
+    DFS,BFS before backTrace
+
+commit 0a32d8ceb416e75bd1a73af9c39abe1be9259614
+Merge: 09e0337 3326f1f
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Tue Jan 21 02:14:05 2020 +0200
+
+    Merge pull request #10 from ofekbr/Bestfs
+    
+    bestFS working?
+
+commit 3326f1fc84d92542d29ea1fe16df050acc77031e
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Tue Jan 21 02:13:34 2020 +0200
+
+    bestFS working?
+
+commit 09e033761f7a22a381e43dc73781034d4b0ca833
+Merge: cd13369 13adad3
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Mon Jan 20 22:07:31 2020 +0200
+
+    Merge pull request #9 from ofekbr/BestFSptr
+    
+    Best f sptr
+
+commit 13adad3818b496db8a8c187c3babdfc902e74ffd
+Author: shani-b <shanib93@gmail.com>
+Date:   Mon Jan 20 16:18:32 2020 +0200
+
+    BestFs
+
+commit 87b0f22cff03b66730d9418f4dd062e80e3e53fb
+Author: shani-b <shanib93@gmail.com>
+Date:   Mon Jan 20 16:17:55 2020 +0200
+
+    BestFs
+
+commit 5bd60708b149524f2c16900d3716381c7b836f0f
+Author: shani-b <shanib93@gmail.com>
+Date:   Sun Jan 19 14:12:28 2020 +0200
+
+    actually compiling
+
+commit cd13369bc4b4d77bed7f0a256970f198ef26e825
+Merge: ffea578 3a3ae72
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Fri Jan 17 10:48:34 2020 +0200
+
+    Merge pull request #8 from ofekbr/Searcher
+    
+    Searcher,BestFS
+
+commit 3a3ae726c5c9d4004d154f8c44df166eeb95b185
+Author: shani-b <shanib93@gmail.com>
+Date:   Fri Jan 17 10:47:33 2020 +0200
+
+    Searcher,BestFS
+
+commit ffea578a1429a3834f3f01560448602bee6df09e
+Merge: 2e2c104 4d45d6a
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Wed Jan 15 18:58:38 2020 +0200
+
+    Merge pull request #7 from ofekbr/Searchable,Matrix
+    
+    cliend handler,state,Matrix
+
+commit 4d45d6a44b72d87841010a93dc7053bb1de008b3
+Author: shani-b <shanib93@gmail.com>
+Date:   Wed Jan 15 18:57:40 2020 +0200
+
+    cliend handler,state,Matrix
+
+commit 2e2c104172debbf9b1966db0119acfc83c65426f
+Merge: 1492de3 20cd827
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Wed Jan 15 17:14:36 2020 +0200
+
+    Merge pull request #6 from ofekbr/Searchable
+    
+    Searchable
+
+commit 20cd827c9357ebf882c0c29777011ef8552bc98b
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Wed Jan 15 01:29:50 2020 +0200
+
+    server now has a timeout
+
+commit 0d26dba36314fa96abb68f389f31df57e95b994b
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Wed Jan 15 01:18:09 2020 +0200
+
+    state - new func getPos which returns its own State.h
+    matrix - added implementation for getAllPossibleStates which returns a list of a given state's neighbors if they exists.
+
+commit 2552e1490c2c65670cb3c53ef0e5dc659c5d8148
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Wed Jan 15 00:39:02 2020 +0200
+
+    1st fixes on matrix being inherited from searchable (added generic on every appearance)
+
+commit 1492de328efc7f367fd57a01570382f39a703534
+Merge: b0a2606 899e30b
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Wed Jan 15 00:31:59 2020 +0200
+
+    Merge pull request #5 from ofekbr/visual_fixes
+    
+    more fixes
+
+commit 899e30b55763ff12df0a0111239738b438cf7d94
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Wed Jan 15 00:31:21 2020 +0200
+
+    more fixes
+
+commit b0a260674e92454a86705bbbc16ff42aec53f3af
+Merge: c438f71 34a9343
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Tue Jan 14 21:41:53 2020 +0200
+
+    Merge pull request #4 from ofekbr/visual_fixes
+    
+    filechachemanager now actually inherit CacheManager
+
+commit 34a93434155ccf22820b0b2e98019d54c30a17c4
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Tue Jan 14 21:41:07 2020 +0200
+
+    filechachemanager now actually inherit CacheManager
+
+commit c438f7166a76bd888cdaf964979a99e4b3837f4a
+Merge: a9641d3 4ed7eb0
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Tue Jan 14 21:00:19 2020 +0200
+
+    Merge pull request #3 from ofekbr/visual_fixes
+    
+    Visual fixes
+
+commit 4ed7eb01dbdc7cb0676f9aca3ca00e9301d0235d
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Tue Jan 14 20:58:46 2020 +0200
+
+    fixed state - proper equals function + setter for m_cameFrom
+
+commit 27a2f08a1e08195a6705c2351e8a3aa614d31b30
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Tue Jan 14 19:18:56 2020 +0200
+
+    now clienthandler closes the client socket instead of the server itself
+
+commit b15a7cf3c888d6c06ee9d3a6068ee65560b49fd2
+Author: ofek <barkai.ofek@gmail.com>
+Date:   Tue Jan 14 19:18:18 2020 +0200
+
+    couple of visual fixes
+
+commit a9641d38b33656aa68c31c36de44a10f7dbe0fe3
+Merge: bbee19e e7ebdcf
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Tue Jan 14 17:19:32 2020 +0200
+
+    Merge pull request #2 from ofekbr/Matrix,State
+    
+    Matrix,state
+
+commit e7ebdcf92a6c8cf993b92aaed8dd0d39c4d2ddec
+Author: shani-b <shanib93@gmail.com>
+Date:   Tue Jan 14 17:17:32 2020 +0200
+
+    cliend handler,state,Matrix
+
+commit 296d05514a22fafc1eec287d7d767061b8637bf8
+Author: shani-b <shanib93@gmail.com>
+Date:   Sun Jan 12 13:58:30 2020 +0200
+
+    cliend handler, cacheManeger
+
+commit bbee19e8147fade3ec65de174cb7097b2cf71e66
+Merge: b8a9035 0b03411
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Sun Jan 12 12:55:28 2020 +0200
+
+    Merge pull request #1 from ofekbr/ofekbr-patch-1
+    
+    Add files via upload
+
+commit 0b0341134db97db055f953975765712051b67c9a
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Sun Jan 12 12:54:52 2020 +0200
+
+    Add files via upload
+
+commit b8a9035e2d78990d848686968a9d248757899734
+Author: shani-b <58752443+shani-b@users.noreply.github.com>
+Date:   Sun Jan 12 12:51:51 2020 +0200
+
+    Delete server.cpp
+
+commit 3c791872cc11fda3cd5bc7942469db49ffb49bcc
+Author: ofekbr <56196501+ofekbr@users.noreply.github.com>
+Date:   Sun Jan 12 12:48:46 2020 +0200
+
+    Add files via upload
