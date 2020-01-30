@@ -107,7 +107,7 @@ S BestFS<T, S>::search(Searchable<T> *problem) {
                     //adjust its priority
                     openList.find(*neigh)->setCost(n->getCost() + (*neigh)->getValue());
                     openList.find(*neigh)->setCameFrom(n);
-                    openList.update(neigh);
+                    openList.update(*neigh);
                 }
             }
         }

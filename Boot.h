@@ -40,8 +40,6 @@ public:
         ObjectAdapter<Searchable<pair<int,int>>*,string> objectAdapter(Astar);
         MyClientHandler ch(&objectAdapter);
         server.open(stod(port), &ch);
-        int num = Astar->evaluatedNodes();
-        cout<< num << endl;
     };
 };
 
